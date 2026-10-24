@@ -32,8 +32,6 @@ class World:
     # -- editing ------------------------------------------------------
     def paint(self, gx: int, gy: int, material: int, radius: int = BRUSH_RADIUS) -> None:
         """Fill empty cells in a square brush around the given cell."""
-        if not self.in_bounds(gx, gy):
-            return
         for y in range(gy - radius, gy + radius + 1):
             for x in range(gx - radius, gx + radius + 1):
                 if self.in_bounds(x, y) and self.is_empty(x, y):

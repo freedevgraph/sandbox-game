@@ -27,19 +27,22 @@ class Material(IntEnum):
 
 def powder_targets(x: int, y: int, rng: random.Random) -> list[Coord]:
     """Straight down first, then the two diagonals, in random order."""
-    candidates = [(x, y + 1), (x - 1, y + 1), (x + 1, y + 1)]
-    rng.shuffle(candidates)
-    return candidates
+    diagonals = [(x - 1, y + 1), (x + 1, y + 1)]
+    rng.shuffle(diagonals)
+    return [(x, y + 1)] + diagonals
 
 
 def liquid_targets(x: int, y: int, rng: random.Random) -> list[Coord]:
     """Fall down, and occasionally spill sideways."""
     spread = 0.35
     candidates = [(x, y + 1)]
-    if y > 0 and rng.random() < spread:
-        candidates.append((x - 1, y))
-    if y > 0 and rng.random() < spread:
-        candidates.append((x + 1, y))
+    sides = []
+    if rng.random() < spread:
+        sides.append((x - 1, y))
+    if rng.random() < spread:
+        sides.append((x + 1, y))
+    rng.shuffle(sides)
+    candidates.extend(sides)
     return candidates
 
 

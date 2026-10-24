@@ -22,6 +22,7 @@ BUTTON_MATERIALS = {
 # Held buttons in mouse-button mode: index in pygame.mouse.get_pressed() -> material.
 HELD_MATERIALS = {
     0: Material.SAND,    # left
+    1: Material.STONE,   # middle
     2: Material.WATER,   # right
 }
 
